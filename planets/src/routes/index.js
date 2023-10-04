@@ -4,9 +4,11 @@ const middlewares = require("../middlewares");
 
 const router = Router();
 
+router.get("/:_id", controllers.getPlanets);
 router.get("/", controllers.getPlanets);
-router.post("/", middlewares.planetValidation, controllers.postPlanets);
-router.delete("/", controllers.deletePlanets);
-router.put("/", controllers.putPlanets);
+
+router.post("/", controllers.postPlanets);
+router.delete("/:_id", controllers.deletePlanets);
+router.put("/:_id", controllers.putPlanets);
 
 module.exports = router;

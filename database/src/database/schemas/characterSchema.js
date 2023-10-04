@@ -30,4 +30,15 @@ characterSchema.statics.insert = async function (character) {
   return await this.create(character);
 };
 
+characterSchema.statics.delete = async function (_id) {
+  return await this.findByIdAndDelete(_id);
+};
+
+characterSchema.statics.put = async function (_id, body) {
+  return await this.findByIdAndUpdate(_id, {
+    height: body.heigth,
+    mass: body.mass,
+  });
+};
+
 module.exports = characterSchema;

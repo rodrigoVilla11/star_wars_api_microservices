@@ -28,5 +28,14 @@ planetsSchema.statics.get = async function (_id) {
 planetsSchema.statics.insert = async function (planet) {
   return await this.create(planet);
 };
+planetsSchema.statics.delete = async function (_id) {
+  return await this.findByIdAndDelete(_id);
+};
+planetsSchema.statics.put = async function (_id, body) {
+  return await this.findByIdAndUpdate(_id, {
+    name: body.name,
+    residents: body.residents,
+  });
+};
 
 module.exports = planetsSchema;
