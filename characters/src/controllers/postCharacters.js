@@ -3,6 +3,7 @@ const axios = require("axios");
 
 module.exports = async (req, res) => {
   const {
+    _id,
     name,
     height,
     mass,
@@ -13,6 +14,7 @@ module.exports = async (req, res) => {
     gender,
   } = req.body;
   const newCharacter = await axios.post("http://database:8004/Character", {
+    _id: _id,
     name: name,
     height: height,
     mass: mass,
