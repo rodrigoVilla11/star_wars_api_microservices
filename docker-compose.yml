@@ -13,6 +13,8 @@ services:
     build: ./characters
     ports:
       - "8001:8001"
+    volumes:
+      - "./characters:/app/characters"
   films:
     container_name: films
     restart: always
