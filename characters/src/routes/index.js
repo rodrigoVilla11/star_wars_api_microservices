@@ -6,7 +6,7 @@ const router = Router();
 
 router.get("/", controllers.getCharacters);
 router.get("/:_id", controllers.getCharacters);
-router.post("/", middlewares.characterValidation, controllers.postCharacters);
+router.post("/", controllers.postCharacters);
 router.delete("/:_id", controllers.deleteCharacters);
 router.put("/:_id", controllers.putCharacters);
 
