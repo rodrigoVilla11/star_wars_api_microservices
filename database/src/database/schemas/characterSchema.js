@@ -47,7 +47,7 @@ characterSchema.statics.delete = async function (_id) {
 
 characterSchema.statics.put = async function (_id, body) {
 	return await this.findByIdAndUpdate(_id, {
-		height: body.heigth,
+		height: body.height,
 		mass: body.mass,
 	});
 };
