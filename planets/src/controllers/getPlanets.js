@@ -3,7 +3,13 @@ const { response } = require("../utils");
 
 module.exports = async (req, res) => {
 	const { _id } = req.params;
-	if (!_id) {
+	const { search } = req.query;
+	if (search) {
+		const planets = await axios.get(
+			"http://localhost:8004/Planets?search=" + search
+		);
+		response(res, 200, planets.data);
+	} else if (!_id) {
 		const planets = await axios.get("http://localhost:8004/Planets");
 		response(res, 200, planets.data);
 	} else {

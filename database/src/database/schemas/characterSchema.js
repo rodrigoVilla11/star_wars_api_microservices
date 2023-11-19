@@ -14,10 +14,21 @@ const characterSchema = new Schema({
 	films: [{ type: String, ref: "Films" }],
 });
 
-characterSchema.statics.list = async function () {
-	return await this.find()
-		.populate("homeworld", ["_id", "name"])
-		.populate("films", ["_id", "title"]);
+characterSchema.statics.list = async function (search) {
+	if (search) {
+		return await this.find({
+			name: {
+				$regex: /*`^${search}` PARA BUSCAR ORDENADO*/ search,
+				$options: "i",
+			},
+		})
+			.populate("homeworld", ["_id", "name"])
+			.populate("films", ["_id", "title"]);
+	} else {
+		return await this.find()
+			.populate("homeworld", ["_id", "name"])
+			.populate("films", ["_id", "title"]);
+	}
 };
 
 characterSchema.statics.get = async function (_id) {
@@ -39,6 +50,10 @@ characterSchema.statics.put = async function (_id, body) {
 		height: body.heigth,
 		mass: body.mass,
 	});
+};
+
+characterSchema.statics.listSearch = async function (body) {
+	return await this.find({ name: { $regex: body, $options: "i" } });
 };
 
 module.exports = characterSchema;

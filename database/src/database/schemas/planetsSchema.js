@@ -14,10 +14,16 @@ const planetsSchema = new Schema({
 	films: [{ type: String, ref: "Films" }],
 });
 
-planetsSchema.statics.list = async function () {
-	return await this.find()
-		.populate("residents", ["_id", "name"])
-		.populate("films", ["_id", "title"]);
+planetsSchema.statics.list = async function (search) {
+	if (search) {
+		return await this.find({ name: { $regex: search, $options: "i" } })
+			.populate("residents", ["_id", "name"])
+			.populate("films", ["_id", "title"]);
+	} else {
+		return await this.find()
+			.populate("residents", ["_id", "name"])
+			.populate("films", ["_id", "title"]);
+	}
 };
 planetsSchema.statics.get = async function (_id) {
 	return await this.findById(_id)
