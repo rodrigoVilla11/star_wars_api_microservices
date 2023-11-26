@@ -6,14 +6,14 @@ module.exports = async (req, res) => {
 	const { search } = req.query;
 	if (search) {
 		const planets = await axios.get(
-			"http://localhost:8004/Planets?search=" + search
+			"http://database:8004/Planets?search=" + search
 		);
 		response(res, 200, planets.data);
 	} else if (!_id) {
-		const planets = await axios.get("http://localhost:8004/Planets");
+		const planets = await axios.get("http://database:8004/Planets");
 		response(res, 200, planets.data);
 	} else {
-		const planet = await axios.get(`http://localhost:8004/Planets/${_id}`);
+		const planet = await axios.get(`http://database:8004/Planets/${_id}`);
 		response(res, 200, planet.data);
 	}
 };

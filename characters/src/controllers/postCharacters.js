@@ -16,7 +16,7 @@ module.exports = async (req, res) => {
 	} = req.body;
 
 	try {
-		const newCharacter = await axios.post("http://localhost:8004/Character", {
+		const newCharacter = await axios.post("http://database:8004/Character", {
 			_id: Math.random(),
 			name: name,
 			height: height,
